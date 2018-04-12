@@ -28,6 +28,7 @@ export default class AutoHeightWebView extends PureComponent {
     onLoad: PropTypes.func,
     onLoadStart: PropTypes.func,
     onLoadEnd: PropTypes.func,
+    onMessage: PropTypes.func,
     onShouldStartLoadWithRequest: PropTypes.func,
     // add web/files... to project root
     files: PropTypes.arrayOf(
@@ -67,9 +68,9 @@ export default class AutoHeightWebView extends PureComponent {
       this.setState({ height }, () => {
         enableAnimation
           ? Animated.timing(this.opacityAnimatedValue, {
-              toValue: 1,
-              duration: animationDuration
-            }).start(() => onHeightUpdated(height, this.props))
+            toValue: 1,
+            duration: animationDuration
+          }).start(() => onHeightUpdated(height, this.props))
           : onHeightUpdated(height, this.props);
       });
     }
@@ -88,6 +89,7 @@ export default class AutoHeightWebView extends PureComponent {
       onLoad,
       onLoadStart,
       onLoadEnd,
+      onMessage,
       onShouldStartLoadWithRequest,
       scalesPageToFit,
       enableAnimation,
@@ -114,6 +116,7 @@ export default class AutoHeightWebView extends PureComponent {
           onLoad={onLoad}
           onLoadStart={onLoadStart}
           onLoadEnd={onLoadEnd}
+          onMessage={onMessage}
           onShouldStartLoadWithRequest={onShouldStartLoadWithRequest}
           style={styles.webView}
           injectedJavaScript={script + customScript}
